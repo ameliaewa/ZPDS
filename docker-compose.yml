@@ -1,0 +1,34 @@
+version: "3.12"
+services:
+  backend:
+    build: meal_planner_backend
+    volumes:
+      - ./meal_planner_backend:/app
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    image: backend:django
+    container_name: meal_planner_backend
+    depends_on:
+      - postgresdb
+  postgresdb:
+    image: postgres
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    env_file:
+      - .env
+    container_name: db
+    ports:
+      - "9998:5432"
+  frontend:
+    build: meal-planner-ui
+    container_name: meal-planner-ui
+    ports: 
+      - "3002:3000"
+    env_file:
+      - .env
+    links:
+      - backend
+    restart: always
+

@@ -1,0 +1,50 @@
+*.iml
+.gradle
+/local.properties
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+
+/data
+
+# Węzły i pliki menedżera pakietów
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Pliki konfiguracyjne dla IDE
+.idea/
+.vscode/
+
+# Pliki środowiskowe
+.env
+.env.local
+.env.*.local
+
+# Pliki i katalogi generowane przez React
+build/
+dist/
+public/
+
+# Pliki cache i inne generowane dane
+.cache/
+*.log
+
+# Pliki zależności globalnych
+*.tgz
+
+# Ignorowanie systemu MacOS
+.DS_Store
+
+# Ignorowanie systemu Windows
+Thumbs.db
+

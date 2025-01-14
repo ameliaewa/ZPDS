@@ -33,7 +33,7 @@ yarn-error.log
 # Pliki i katalogi generowane przez React
 build/
 dist/
-public/
+
 
 # Pliki cache i inne generowane dane
 .cache/

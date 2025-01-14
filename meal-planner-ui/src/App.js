@@ -1,25 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import MealForm from './Components/MealForm';
+import MealPlan from './Components/MealPlan';
+import PDFGenerator from './Components/PDFGenerator';
 
-function App() {
+const App = () => {
+  const [formData, setFormData] = useState(null);
+  const [mealPlan, setMealPlan] = useState(null);
+
+  const handleFormSubmit = (data) => {
+    setFormData(data);
+    // Tutaj możesz dodać logikę generowania jadłospisu
+    const generatedMealPlan = generateMealPlan(data);
+    setMealPlan(generatedMealPlan);
+  };
+
+  const generateMealPlan = (data) => {
+    // Tu implementujesz logikę generowania jadłospisu
+    return {
+      days: [
+        { day: 'Poniedziałek', meals: ['Śniadanie', 'Obiad', 'Kolacja'] },
+        { day: 'Wtorek', meals: ['Śniadanie', 'Obiad', 'Kolacja'] },
+        // Reszta dni...
+      ],
+      shoppingList: ['Chleb', 'Jabłka', 'Makaron'],
+    };
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          TEST  <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Meal Planner</h1>
+      {!formData ? (
+        <MealForm onSubmit={handleFormSubmit} />
+      ) : (
+        <>
+          <MealPlan mealPlan={mealPlan} />
+          <PDFGenerator mealPlan={mealPlan} />
+        </>
+      )}
     </div>
   );
-}
+};
 
 export default App;

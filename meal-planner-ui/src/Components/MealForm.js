@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import './MealForm.css'
-// import DatePicker from 'react-datepicker';
-// import 'react-datepicker/dist/react-datepicker.css';
 
 const MealForm = ({ onSubmit }) => {
   const [formData, setFormData] = useState({
@@ -28,8 +26,35 @@ const MealForm = ({ onSubmit }) => {
     }));
   };
 
+  const handleDayChange = (e) => {
+    const { value, checked } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      days: checked
+        ? [...prev.days, value]
+        : prev.days.filter((day) => day !== value),
+    }));
+  };
+  
   const handleSubmit = (e) => {
     e.preventDefault();
+    const dataString = `
+    Budget: ${formData.budget}
+    Cooking Time: ${formData.cookingTime}
+    Days: ${formData.days.join(', ')}
+    Suggest Meals: ${formData.suggestMeals}
+    Meals Per Day: ${formData.mealsPerDay}
+    Calories Per Day: ${formData.caloriesPerDay}
+    Allergies: ${formData.allergies}
+    Diet: ${formData.diet}
+    Cuisine: ${formData.cuisine}
+    Preferences: ${formData.preferences}
+    Work Meals: ${formData.workMeals}
+    Breakfast Time: ${formData.breakfastTime}
+    Fridge Items: ${formData.fridgeItems}
+  `; //do wywalenia
+
+    alert(dataString); // do wywalenia
     onSubmit(formData);
   };
 
@@ -43,6 +68,9 @@ const MealForm = ({ onSubmit }) => {
           value={formData.budget}
           onChange={handleChange}
           placeholder="Wpisz budżet w PLN"
+          onInput={(e) => {
+            e.target.value = e.target.value.replace(/[^0-9]/g, '');
+          }}
         />
       </label>
       <br />
@@ -55,32 +83,82 @@ const MealForm = ({ onSubmit }) => {
           value={formData.cookingTime}
           onChange={handleChange}
           placeholder="Czas na gotowanie"
+          onInput={(e) => {
+            e.target.value = e.target.value.replace(/[^0-9]/g, '');
+          }}
         />
       </label>
       <br />
 
       <label>
         Dni tygodnia na gotowanie:
-        <select
-          multiple
-          name="days"
-          value={formData.days}
-          onChange={(e) =>
-            setFormData((prev) => ({
-              ...prev,
-              days: Array.from(e.target.selectedOptions, (option) => option.value),
-            }))
-          }
-        >
-          <option value="Monday">Poniedziałek</option>
-          <option value="Tuesday">Wtorek</option>
-          <option value="Wednesday">Środa</option>
-          <option value="Thursday">Czwartek</option>
-          <option value="Friday">Piątek</option>
-          <option value="Saturday">Sobota</option>
-          <option value="Sunday">Niedziela</option>
-        </select>
-      </label>
+        <div className="checkbox-container">
+            <label className="checkbox-label">
+            <input
+                type="checkbox"
+                value="Monday"
+                checked={formData.days.includes("Monday")}
+                onChange={handleDayChange}
+            />
+            Poniedziałek
+            </label>
+            <label className="checkbox-label">
+            <input
+                type="checkbox"
+                value="Tuesday"
+                checked={formData.days.includes("Tuesday")}
+                onChange={handleDayChange}
+            />
+            Wtorek
+            </label>
+            <label className="checkbox-label">
+            <input
+                type="checkbox"
+                value="Wednesday"
+                checked={formData.days.includes("Wednesday")}
+                onChange={handleDayChange}
+            />
+            Środa
+            </label>
+            <label className="checkbox-label">
+            <input
+                type="checkbox"
+                value="Thursday"
+                checked={formData.days.includes("Thursday")}
+                onChange={handleDayChange}
+            />
+            Czwartek
+            </label>
+            <label className="checkbox-label">
+            <input
+                type="checkbox"
+                value="Friday"
+                checked={formData.days.includes("Friday")}
+                onChange={handleDayChange}
+            />
+            Piątek
+            </label>
+            <label className="checkbox-label">
+            <input
+                type="checkbox"
+                value="Saturday"
+                checked={formData.days.includes("Saturday")}
+                onChange={handleDayChange}
+            />
+            Sobota
+            </label>
+            <label className="checkbox-label">
+            <input
+                type="checkbox"
+                value="Sunday"
+                checked={formData.days.includes("Sunday")}
+                onChange={handleDayChange}
+            />
+            Niedziela
+            </label>
+        </div>
+        </label>
+
       <br />
 
       <label>
@@ -103,6 +181,10 @@ const MealForm = ({ onSubmit }) => {
           onChange={handleChange}
           min="1"
           max="10"
+          step="1"
+          onInput={(e) => {
+            e.target.value = e.target.value.replace(/[^0-9]/g, '');
+          }}
         />
       </label>
       <br />
@@ -114,6 +196,11 @@ const MealForm = ({ onSubmit }) => {
           name="caloriesPerDay"
           value={formData.caloriesPerDay}
           onChange={handleChange}
+          min="0"
+          step="1"
+          onInput={(e) => {
+            e.target.value = e.target.value.replace(/[^0-9]/g, '');
+          }}
         />
       </label>
       <br />
@@ -137,7 +224,7 @@ const MealForm = ({ onSubmit }) => {
           value={formData.diet}
           onChange={handleChange}
         >
-          <option value="">Wybierz...</option>
+          <option value="">Zwykła</option>
           <option value="vege">Wegetariańska</option>
           <option value="vegan">Wegańska</option>
           <option value="gluten-free">Bezglutenowa</option>
@@ -187,6 +274,11 @@ const MealForm = ({ onSubmit }) => {
           name="breakfastTime"
           value={formData.breakfastTime}
           onChange={handleChange}
+          min="0"
+          step="1"
+          onInput={(e) => {
+            e.target.value = e.target.value.replace(/[^0-9]/g, '');
+          }}
         />
       </label>
       <br />

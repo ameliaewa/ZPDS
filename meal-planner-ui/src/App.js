@@ -9,18 +9,16 @@ const App = () => {
 
   const handleFormSubmit = (data) => {
     setFormData(data);
-    // Tutaj możesz dodać logikę generowania jadłospisu
+    //Logika generowania jadłospisu
     const generatedMealPlan = generateMealPlan(data);
     setMealPlan(generatedMealPlan);
   };
 
   const generateMealPlan = (data) => {
-    // Tu implementujesz logikę generowania jadłospisu
     return {
       days: [
         { day: 'Poniedziałek', meals: ['Śniadanie', 'Obiad', 'Kolacja'] },
         { day: 'Wtorek', meals: ['Śniadanie', 'Obiad', 'Kolacja'] },
-        // Reszta dni...
       ],
       shoppingList: ['Chleb', 'Jabłka', 'Makaron'],
     };
@@ -28,7 +26,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <h1>Meal Planner</h1>
+      <h1>Weekly Meal Planner</h1>
       {!formData ? (
         <MealForm onSubmit={handleFormSubmit} />
       ) : (

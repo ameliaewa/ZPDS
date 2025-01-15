@@ -20,7 +20,11 @@ const PDFGenerator = ({ mealPlan }) => {
 
   return (
     <PDFDownloadLink document={generatePDF()} fileName="jadlospis.pdf">
-      {({ loading }) => (loading ? 'Generowanie PDF...' : 'Pobierz PDF')}
+      {({ loading }) => (
+        <button className="download-button">
+          {loading ? 'Generowanie PDF...' : 'Pobierz PDF'}
+        </button>
+      )}
     </PDFDownloadLink>
   );
 };

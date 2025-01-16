@@ -6,12 +6,20 @@ services:
       - ./meal_planner_backend:/app
     env_file:
       - .env
+    environment:
+      - PYTHONUNBUFFERED=1
+      - DJANGO_DEBUG=True
+      - PYTHONDONTWRITEBYTECODE=1
+      - PYDEVD_DISABLE_FILE_VALIDATION=1  # Add this
     ports:
       - "8000:8000"
+      - "5678:5678"  # Debug port
+    command: python -X frozen_modules=off -m debugpy --listen 0.0.0.0:5678 --wait-for-client manage.py runserver 0.0.0.0:8000
     image: backend:django
     container_name: meal_planner_backend
     depends_on:
       - postgresdb
+
   postgresdb:
     image: postgres
     volumes:
@@ -21,14 +29,14 @@ services:
     container_name: db
     ports:
       - "9998:5432"
+
   frontend:
     build: meal-planner-ui
     container_name: meal-planner-ui
-    ports: 
+    ports:
       - "3002:3000"
     env_file:
       - .env
     links:
       - backend
     restart: always
-

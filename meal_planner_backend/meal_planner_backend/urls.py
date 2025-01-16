@@ -16,7 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.views.decorators.csrf import csrf_exempt
+from meal_planner_backend import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/generate-meal-plan/', csrf_exempt(views.generate_meal_plan), name='generate-meal-plan'),
 ]

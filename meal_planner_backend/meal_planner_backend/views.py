@@ -46,22 +46,30 @@ def create_prompt(data):
 def process_meal_plan(request):
     if request.method == 'POST':
         try:
-            # Get the raw data and print it
-            print("Raw request body:", request.body)
-
-            # Parse the JSON data
             data = json.loads(request.body)
-
-            # Print the parsed data
             print("Received data:", data)
             prompt = create_prompt(data)
             print(prompt)
 
+            test_response = {
+                              "days": [
+                                {
+                                  "day": "Monday",
+                                  "meals": ["Breakfast: Skyr with fruit", "Lunch: Polish dumplings", "Dinner: Italian pasta"]
+                                },
+                                {
+                                  "day": "Tuesday",
+                                  "meals": ["Breakfast: Oatmeal with milk", "Lunch: Tomato soup", "Dinner: Grilled chicken"]
+                                }
+                              ],
+                              "shoppingList": ["Skyr", "Fruit", "Dumplings", "Pasta", "Milk", "Tomatoes", "Chicken"]
+                            }
+
             # Return the same data back to React
             return JsonResponse({
                 'status': 'success',
-                'message': 'Data received successfully',
-                'received_data': data
+                'message': 'Meal plan generated successfully',
+                'received_data': test_response
             })
 
         except json.JSONDecodeError as e:

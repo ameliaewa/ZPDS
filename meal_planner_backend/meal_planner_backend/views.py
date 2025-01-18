@@ -3,6 +3,9 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 
+# from meal_planner_backend.GPT_API import generate_meal_plan, read_key
+
+
 def create_prompt(data):
     # Extracting data from the JSON
     days = ', '.join(data['days'])
@@ -23,8 +26,8 @@ def create_prompt(data):
         "Ilość posiłków dziennie: {}. Dziennie jem {} kcal. Czas na gotowanie obiadów mam w {} i mogę przeznaczyć na to {} minut, "
         "Mój budżet wynosi: {} zł. Mam uczulenie lub nie lubię: {}. Na przygotowanie śniadania mam {} minut. "
         "Chcę aby posiłki były inspirowane kuchnią {}. Moje preferencje dotyczące jedzenia to: {}. "
-        "W lodówce mam {}, więc układając plan weź to pod uwagę.\n\n"
-        "Przedstaw rozpiskę w formie jsona.")
+        "W lodówce mam {}, więc układając plan weź to pod uwagę."
+        "Przedstaw rozpiskę w formie jsona o takiej strukturze: .")
 
     # Filling in the placeholders
     formatted_output = output.format(
@@ -51,6 +54,9 @@ def process_meal_plan(request):
             prompt = create_prompt(data)
             print(prompt)
 
+            # testowy json (docelowo ma taki powstawać z chata)
+            # API_KEY = read_key("key.txt")
+            # response = generate_meal_plan(API_KEY, prompt)
             test_response = {
                               "days": [
                                 {

@@ -33,7 +33,7 @@ def read_key(file_path):
         key = file.read()
     return key
 
-def main(API_KEY, prompt):
+def generate_meal_plan(API_KEY, prompt):
         response = chat_with_gpt(prompt, API_KEY)
         print(f"GPT: {response}")
 

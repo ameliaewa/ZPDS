@@ -22,4 +22,5 @@ from meal_planner_backend import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/generate-meal-plan/', csrf_exempt(views.generate_meal_plan), name='generate-meal-plan'),
+    path('generate-meal-plan/', views.generate_meal_plan, name='generate_meal_plan'),
 ]

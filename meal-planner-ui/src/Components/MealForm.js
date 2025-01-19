@@ -67,7 +67,7 @@ const MealForm = ({ onSubmit }) => {
           name="budget"
           value={formData.budget}
           onChange={handleChange}
-          placeholder="Wpisz budżet w PLN"
+          placeholder="Wpisz tygodniowy budżet w PLN"
           onInput={(e) => {
             e.target.value = e.target.value.replace(/[^0-9]/g, '');
           }}

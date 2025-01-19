@@ -6,4 +6,4 @@ tzdata==2022.7
 whitenoise==6.2.0
 debugpy==1.8.0
 django-cors-headers
-python-dotenv
+python-dotenv   

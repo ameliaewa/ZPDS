@@ -2,7 +2,10 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
 import json
+from django.conf import settings
+import openai
 
+openai.api_key = settings.OPENAI_API_KEY
 
 @csrf_exempt
 @require_http_methods(["POST"])

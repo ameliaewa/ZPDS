@@ -10,6 +10,7 @@ const App = () => {
 
   const handleFormSubmit = async (data) => {
     setIsLoading(true);
+
     try {
       const response = await fetch('http://localhost:8000/api/process-meal-plan/', {
         method: 'POST',
@@ -22,23 +23,29 @@ const App = () => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-      
+
+      // Wait for the full JSON response
       const result = await response.json();
       
-      // Here we store `result.received_data` in state, 
-      // which should look like:
+      // The shape here should match your backend response
+      // For example:
       // {
-      //   "mealPlan": {
-      //     "days": [...]
-      //   },
-      //   "shoppingList": [...]
+      //   "status": "success",
+      //   "message": "Meal plan generated successfully",
+      //   "received_data": {
+      //       "mealPlan": { "days": [...] },
+      //       "shoppingList": [...]
+      //   }
       // }
+      
       setFormData(data);
       setMealPlan(result.received_data);
+
     } catch (error) {
       console.error('Error:', error);
       alert('Failed to process meal plan');
     } finally {
+      // Turn off loading after we get a response or an error
       setIsLoading(false);
     }
   };
@@ -47,17 +54,17 @@ const App = () => {
     <div className="App">
       <h1>Weekly Meal Planner</h1>
 
-      {isLoading ? (
-        <p>Processing your meal plan...</p>
-      ) : !formData ? (
-        // If we haven't submitted form data yet, show the form
+      {/* 1) If we are loading, show a spinner or text */}
+      {isLoading && <p>Generating your meal plan, please wait...</p>}
+
+      {/* 2) If not loading and we haven't submitted form data, show the form */}
+      {!isLoading && !formData && (
         <MealForm onSubmit={handleFormSubmit} />
-      ) : (
-        // Once we have form data (and mealPlan), show meal plan
-        <>
-          {/* Important: Pass it as `data={mealPlan}` because the MealPlan component uses `({ data })` */}
-          <MealPlan data={mealPlan} />
-        </>
+      )}
+
+      {/* 3) If not loading and we have formData + mealPlan, show the plan */}
+      {!isLoading && formData && mealPlan && (
+        <MealPlan data={mealPlan} />
       )}
     </div>
   );

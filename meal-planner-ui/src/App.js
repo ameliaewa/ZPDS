@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import MealForm from './Components/MealForm';
 import MealPlan from './Components/MealPlan';
-import PDFGenerator from './Components/PDFGenerator';
 
 const App = () => {
   const [formData, setFormData] = useState(null);
@@ -17,7 +16,7 @@ const App = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
       });
       
       if (!response.ok) {
@@ -25,6 +24,15 @@ const App = () => {
       }
       
       const result = await response.json();
+      
+      // Here we store `result.received_data` in state, 
+      // which should look like:
+      // {
+      //   "mealPlan": {
+      //     "days": [...]
+      //   },
+      //   "shoppingList": [...]
+      // }
       setFormData(data);
       setMealPlan(result.received_data);
     } catch (error) {
@@ -38,14 +46,17 @@ const App = () => {
   return (
     <div className="App">
       <h1>Weekly Meal Planner</h1>
+
       {isLoading ? (
         <p>Processing your meal plan...</p>
       ) : !formData ? (
+        // If we haven't submitted form data yet, show the form
         <MealForm onSubmit={handleFormSubmit} />
       ) : (
+        // Once we have form data (and mealPlan), show meal plan
         <>
-          <MealPlan mealPlan={mealPlan} />
-          <PDFGenerator mealPlan={mealPlan} />
+          {/* Important: Pass it as `data={mealPlan}` because the MealPlan component uses `({ data })` */}
+          <MealPlan data={mealPlan} />
         </>
       )}
     </div>

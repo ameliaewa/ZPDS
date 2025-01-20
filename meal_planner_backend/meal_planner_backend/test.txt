@@ -1,0 +1,78 @@
+{
+  "mealPlan": {
+    "days": [
+      {
+        "day": "Monday",
+        "meals": [
+          {
+            "name": "Breakfast",
+            "time": "08:00",
+            "recipe": {
+              "ingredients": ["ingredient1", "ingredient2"],
+              "instructions": "Step-by-step instructions here."
+            }
+          },
+          {
+            "name": "Lunch",
+            "time": "13:00",
+            "recipe": {
+              "ingredients": ["ingredient1", "ingredient2"],
+              "instructions": "Step-by-step instructions here."
+            }
+          },
+          {
+            "name": "Dinner",
+            "time": "19:00",
+            "recipe": {
+              "ingredients": ["ingredient1", "ingredient2"],
+              "instructions": "Step-by-step instructions here."
+            }
+          }
+        ]
+      },
+      {
+        "day": "Tuesday",
+        "meals": [
+          {
+            "name": "Breakfast",
+            "time": "08:00",
+            "recipe": {
+              "ingredients": ["ingredient1", "ingredient2"],
+              "instructions": "Step-by-step instructions here."
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "shoppingList": [
+    {
+      "item": "ingredient1",
+      "quantity": "2 kg",
+      "category": "Vegetables"
+    },
+    {
+      "item": "ingredient2",
+      "quantity": "1 liter",
+      "category": "Dairy"
+    }
+  ],
+  "cookingInstructions": {
+    "Monday": [
+      {
+        "meal": "Lunch",
+        "instructions": "Prepare and cook as described."
+      },
+      {
+        "meal": "Dinner",
+        "instructions": "Prepare and cook as described."
+      }
+    ],
+    "Tuesday": [
+      {
+        "meal": "Breakfast",
+        "instructions": "Prepare and cook as described."
+      }
+    ]
+  }
+}

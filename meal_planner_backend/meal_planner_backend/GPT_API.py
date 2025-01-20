@@ -36,6 +36,8 @@ def read_key(file_path):
 def generate_meal_plan(API_KEY, prompt):
         response = chat_with_gpt(prompt, API_KEY)
         print(f"GPT: {response}")
+        return response
+
 
 
 if __name__ == "__main__":

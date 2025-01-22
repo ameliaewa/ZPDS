@@ -36,3 +36,23 @@
     transform: rotate(360deg);
   }
 }
+
+.download-button {
+  background-color: #4CAF50;
+  color: white;
+  border: none; /* Remove default border */
+  padding: 10px 20px; /* Add some padding */
+  text-align: center; /* Center the text */
+  text-decoration: none; /* Remove underline */
+  display: inline-block; /* Align inline */
+  font-size: 16px; /* Larger text */
+  margin: 10px 0; /* Add some space around the button */
+  cursor: pointer; /* Show pointer cursor on hover */
+  border-radius: 5px; /* Rounded corners */
+  transition: background-color 0.3s ease; /* Smooth background color transition */
+}
+
+.download-button:hover {
+  background-color: #45a049; /* Darker green on hover */
+}
+

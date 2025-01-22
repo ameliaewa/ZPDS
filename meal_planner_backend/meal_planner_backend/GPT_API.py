@@ -33,13 +33,15 @@ def read_key(file_path):
         key = file.read()
     return key
 
-def main(API_KEY, prompt):
+def generate_meal_plan(API_KEY, prompt):
         response = chat_with_gpt(prompt, API_KEY)
-        print(f"GPT: {response}")
+        # print(f"GPT: {response}")
+        return response
+
 
 
 if __name__ == "__main__":
     API_KEY = read_key("key.txt")
     prompt = "Tell me what I can do for dinner in less than 20 minutes"
-    main(API_KEY, prompt)
+    # main(API_KEY, prompt)
 

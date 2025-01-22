@@ -13,7 +13,7 @@
 .externalNativeBuild
 .cxx
 local.properties
-
+meal_planner_backend/key.txt
 /data
 
 # Węzły i pliki menedżera pakietów

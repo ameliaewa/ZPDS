@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../App.css'; // Import your CSS file
 
-const MealPlan = ({ data }) => {
+const MealPlan = ({ data, formData, onResubmit }) => {
   const { mealPlan, shoppingList } = data || {};
   const [visibleMeals, setVisibleMeals] = useState({}); // Track visibility of meal details
 
@@ -23,11 +23,36 @@ const MealPlan = ({ data }) => {
     }));
   };
 
+  const handleResubmit = () => {
+    if (formData) {
+      onResubmit(formData);
+    } else {
+      alert('No previous data to resubmit');
+    }
+  };
+
   return (
     <div style={{ padding: '20px', background: 'linear-gradient(to bottom, #f0fff4, #e8f5e9)' }}>
       <h2 style={{ color: '#4CAF50', fontSize: '28px', textAlign: 'center', marginBottom: '20px' }}>
         Jadłospis na tydzień
       </h2>
+      <button
+        onClick={handleResubmit}
+        style={{
+          display: 'block',
+          margin: '0 auto 20px auto',
+          backgroundColor: '#388E3C',
+          color: '#fff',
+          border: 'none',
+          padding: '12px 20px',
+          borderRadius: '8px',
+          cursor: 'pointer',
+          fontSize: '16px',
+          boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
+        }}
+      >
+        Wygeneruj ponownie
+      </button>
       {mealPlan.days.map((day, dayIndex) => (
         <div
           key={dayIndex}

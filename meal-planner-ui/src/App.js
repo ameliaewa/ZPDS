@@ -26,24 +26,14 @@ const App = () => {
 
       // Wait for the full JSON response
       const result = await response.json();
-      
-      // The shape here should match your backend response
-      // For example:
-      // {
-      //   "status": "success",
-      //   "message": "Meal plan generated successfully",
-      //   "received_data": {
-      //       "mealPlan": { "days": [...] },
-      //       "shoppingList": [...]
-      //   }
-      // }
+
       
       setFormData(data);
       setMealPlan(result.received_data);
 
     } catch (error) {
       console.error('Error:', error);
-      alert('Failed to process meal plan');
+      alert('Failed to process meal plan'); 
     } finally {
       // Turn off loading after we get a response or an error
       setIsLoading(false);
@@ -64,7 +54,11 @@ const App = () => {
 
       {/* 3) If not loading and we have formData + mealPlan, show the plan */}
       {!isLoading && formData && mealPlan && (
-        <MealPlan data={mealPlan} />
+        <MealPlan 
+        data={mealPlan} 
+        formData={formData} // Pass the formData to use in the MealPlan
+        onResubmit={handleFormSubmit} // Pass the function for resubmission
+        />
       )}
     </div>
   );

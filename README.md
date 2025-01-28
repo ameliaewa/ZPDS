@@ -1,12 +1,17 @@
 # ZPDS meal planner app
 
-clone this github repository
+Clone this github repository
 
-after you have it on your machine run 
+After you have it on your machine:
 
-docker-compose up
+Add open-AI api key in directory `~/meal_planner_backend` in plain text. This key is being used in `~/meal_planner_backend/meal_planner_backend/views.py`
 
-it shoud automaticaly run both backend and ui.
+After adding api-key run:
+
+`docker-compose up`
+
+It shoud automaticaly run both backend and ui.
 
 to check backend livability see http://localhost:8000/
 to chec frontend see http://localhost:3002/
+
